@@ -9,33 +9,36 @@
 # Guess again
 
 from random import randint
+guess = randint(1, 100)
 
-difficulty = "easy"
-attempts = 10
-random_number = 50
-userNumber = 0
-win = False
+
+def set_difficulty():
+    difficulty = input("Choose a difficulty. type 'easy' or 'hard': ")
+    if difficulty == "hard":
+        return 5
+    else:
+        return 10
+
+
+def check_answer():
+    answer = int(input("Make a guess:"))
+    if answer > guess:
+        print("Too high")
+        return "Too high"
+    elif guess > answer:
+        print("Too low")
+        return "Too low"
+    else:
+        print(f"You got it! The answer was {answer}")
+        return "win"
+
+
 print("Welcome to the Number Guessing Game!")
 print("I'm thinking of a number between 1 and 100.")
 
-difficulty = input("Choose a difficulty. type 'easy' or 'hard': ")
+attempts = set_difficulty()
 
-if difficulty == "hard":
-    attempts = 5
-
-random_number = randint(1,100)
-
-for _ in range(0,attempts):
-    userNumber = int(input("Make a guess: "))
-    if userNumber > random_number:
-        print("Too high")
-    if userNumber < random_number:
-        print("Too low")
-    if userNumber == random_number:
-        print("You win")
-        win = True
+for _ in range(0, attempts):
+    result = check_answer()
+    if result == "win":
         break
-
-
-    
-
